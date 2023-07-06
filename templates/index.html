@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css') }}">
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-history"></div>
+        <div id="chat-form">
+            <input type="text" id="user-message" placeholder="Type your message..." />
+            <button onclick="sendUserMessage()">Send</button>
+        </div>
+    </div>
+</body>
+<script>
+    function sendUserMessage() {
+        var userMessage = document.getElementById('user-message').value;
+        addUserMessage(userMessage);
+        document.getElementById('user-message').value = '';
+        
+        fetch('/get_chatbot_response', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'user_message=' + encodeURIComponent(userMessage),
+        })
+        .then(response => response.json())
+        .then(data => addBotMessage(data.response));
+    }
+
+    function addUserMessage(message) {
+        var chatHistory = document.getElementById('chat-history');
+        var userMessageElement = document.createElement('div');
+        userMessageElement.classList.add('user-message');
+        userMessageElement.innerText = message;
+        chatHistory.appendChild(userMessageElement);
+    }
+
+    function addBotMessage(message) {
+        var chatHistory = document.getElementById('chat-history');
+        var botMessageElement = document.createElement('div');
+        botMessageElement.classList.add('bot-message');
+        botMessageElement.innerText = message;
+        chatHistory.appendChild(botMessageElement);
+    }
+</script>
+</html>

@@ -1,0 +1,39 @@
+#chat-container {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+#chat-history {
+    margin-bottom: 10px;
+}
+
+.user-message {
+    background-color: #e2f0cb;
+    padding: 8px;
+    margin-bottom: 5px;
+}
+
+.bot-message {
+    background-color: #f0e6e6;
+    padding: 8px;
+    margin-bottom: 5px;
+}
+
+#chat-form {
+    display: flex;
+}
+
+#user-message {
+    flex-grow: 1;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
